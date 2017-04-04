@@ -49,3 +49,27 @@ namespace ScrapeLibrary
     }
 }
 ```
+
+## 018.2 Create and use *ScrapeLibrary.dll*
+* In order to create *ScrapeLibrary.dll*, we can select *Release* in Visual Studio and build the solution.
+* We can create a testing project, where we will add *ScrapeLibrary.dll* as a reference.
+* In order to use the *Scrape* class, we will be `using ScrapeLibrary;`.
+* We can create an instance of *Scrape*, call *ScrapeWebpage* for an existing url and output the url's data as a string in the console.
+```
+using ScrapeLibrary;
+using System;
+
+namespace ScrapeClassTesting
+{
+    class UseScrape
+    {
+        static void Main(string[] args)
+        {
+            Scrape myScrape = new Scrape();
+            string outputString = myScrape.ScrapeWebPage("https://www.atom.io");
+            Console.WriteLine(outputString);
+            Console.ReadLine();
+        }
+    }
+}
+```
