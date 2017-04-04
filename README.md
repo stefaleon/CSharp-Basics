@@ -73,3 +73,9 @@ namespace ScrapeClassTesting
     }
 }
 ```
+
+## 018.3 Include the *Scrape* library and the *UseScrape* testing program in *ScrapeSolution*
+* In Visual Studio we can select to create a new project of *Visual Studio Solution* type. We can call it *ScrapeSolution*.
+* We can add the two projects containing the *Scrape* library and the *UseScrape* testing program.
+* Now we can have all related code in a single Visual Studio solution and run the testing code after we make sure we have it set *as a StartUp project*.
+* Use a debug build configuration or disable the debug option *Enable Just My Code* in order to stop warning messages.
