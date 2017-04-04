@@ -14,3 +14,38 @@
     File.WriteAllText(@"D:\examples\WriteText.txt", reply);
     Console.ReadLine();
 ```
+
+## 018.1 Create a Class Library
+* In this example we will create the *ScrapeLibrary* project, which will contain a public class that we will call *Scrape*.
+* It will contain an overloaded method called *ScrapeWebpage*. Its first version will be receiving only a *url* parameter, while the second version  will be receiving a *url* as well as a *filepath* parameter.
+* The first version downloads as a string and returns the data from the url we provide, while the second version saves the string to the filepath we provide.
+* The private helper method *GetWebpage* encapsulates the functionality of downloading as a string and returning the data from the url we provide. It is called in both versions of *ScrapeWebpage*.
+```
+using System.IO;
+using System.Net;
+
+namespace ScrapeLibrary
+{
+    public class Scrape
+    {
+        public string ScrapeWebPage(string url)
+        {
+            string reply = GetWebpage(url);
+            return reply;
+        }
+
+        public string ScrapeWebPage(string url, string filepath)
+        {            
+            string reply = GetWebpage(url);
+            File.WriteAllText(filepath, reply);
+            return reply;
+        }
+
+        private string GetWebpage(string url)
+        {
+            WebClient client = new WebClient();
+            return client.DownloadString(url);
+        }
+    }
+}
+```
