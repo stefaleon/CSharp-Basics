@@ -79,3 +79,48 @@ namespace ScrapeClassTesting
 * We can add the two projects containing the *Scrape* library and the *UseScrape* testing program.
 * Now we can have all related code in a single Visual Studio solution and run the testing code after we make sure we have it set *as a StartUp project*.
 * Use a debug build configuration or disable the debug option *Enable Just My Code* in order to stop warning messages.
+
+
+
+## 022 Exceptions Handling
+* Consider the following piece of code, where with the help of the *System.IO.File.ReadAllText* method we read the content of a text file. Then we write it to the console.
+```
+using System;
+using System.IO;
+
+namespace ReadAFile
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            string content = File.ReadAllText(@"D:\some.txt");
+            Console.WriteLine(content);
+            Console.ReadLine();
+        }
+    }
+}
+```
+* Various errors may occur due to many possible scenarios, such as file missing, misspelling of the filename, wrong path etc. In order to protect the user from cryptic system messages and provide a better experience, we can wrap the code in a *try* block and use a *catch* block for the error case. If everything is fine, the *try* block will be executed. If an exception occurs, the catch block can provide the user with helpful messages, including the specific exception message given by *ex.Message*.
+```
+            try
+            {
+                string content = File.ReadAllText(@"D:\asdf\some.txt");
+                Console.WriteLine(content);
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Something went wrong.");
+                Console.WriteLine(ex.Message);
+            }
+```
+* A *finally* block can be added, where cleaning up for our application can be implemented, since this block will be executed in all cases.
+```
+            finally
+            {
+                Console.WriteLine("This is from code in 'finally', which runs no matter what.");
+                Console.WriteLine("Press 'Enter' to exit.");
+            }
+            Console.ReadLine();
+        }
+```
