@@ -1,6 +1,8 @@
 ### C# Basics
 [MVA C# Fundamentals for Absolute Beginners](https://mva.microsoft.com/en-us/training-courses/c-fundamentals-for-absolute-beginners-16169?l=Lvld4EQIC_2706218949)
 
+
+&nbsp;
 ## 017 Using .NET Assemplies
 * The *.NET Class Library* is a collection of classes. The code is split into multiple files, the *.NET assemblies*. In order to make use of them we add the appropriate *using* statements.
 * In this example we use the *System.IO* and the *System.Net* assemblies.
@@ -14,7 +16,7 @@
     File.WriteAllText(@"D:\examples\WriteText.txt", reply);
     Console.ReadLine();
 ```
-
+&nbsp;
 ## 018.1 Create a Class Library
 * In this example we will create the *ScrapeLibrary* project, which will contain a public class that we will call *Scrape*.
 * It will contain an overloaded method called *ScrapeWebpage*. Its first version will be receiving only a *url* parameter, while the second version  will be receiving a *url* as well as a *filepath* parameter.
@@ -49,7 +51,7 @@ namespace ScrapeLibrary
     }
 }
 ```
-
+&nbsp;
 ## 018.2 Create and use *ScrapeLibrary.dll*
 * In order to create *ScrapeLibrary.dll*, we can select *Release* in Visual Studio and build the solution.
 * We can create a testing project, where we will add *ScrapeLibrary.dll* as a reference.
@@ -73,7 +75,7 @@ namespace ScrapeClassTesting
     }
 }
 ```
-
+&nbsp;
 ## 018.3 Include the *Scrape* library and the *UseScrape* testing program in *ScrapeSolution*
 * In Visual Studio we can select to create a new project of *Visual Studio Solution* type. We can call it *ScrapeSolution*.
 * We can add the two projects containing the *Scrape* library and the *UseScrape* testing program.
@@ -81,7 +83,7 @@ namespace ScrapeClassTesting
 * Use a debug build configuration or disable the debug option *Enable Just My Code* in order to stop warning messages.
 
 
-
+&nbsp;
 ## 022 Exceptions Handling
 * Consider the following piece of code, where with the help of the *System.IO.File.ReadAllText* method we read the content of a text file. Then we write it to the console.
 ```
@@ -124,3 +126,24 @@ namespace ReadAFile
             Console.ReadLine();
         }
 ```
+&nbsp;
+## 023.1 Handling Events, Timer example
+* In order to demonstrate a simple event handling example, we will use the *Timer* object. To do that, we start with `using System.Timers;`.
+* We create the *myTimer* instance of the *Timer* class by calling the constructor and assigning a value of 2000 to the *interval* parameter.
+```
+Timer myTimer = new Timer(2000);
+```
+* The *Elapsed* event will be getting raised every 2 seconds (2000 msec) and our handler code will be getting called every time this happens. We assign the *MyTimer_Elapsed* handler to the event and set it to call the *SignalTime* event argument, which displays the time when the event was raised.
+```
+    myTimer.Elapsed += MyTimer_Elapsed;
+
+private static void MyTimer_Elapsed(object sender, ElapsedEventArgs e)
+    {
+        Console.WriteLine("Elapsed: {0:hh:mm:ss:fff}", e.SignalTime);
+    }
+```
+* Get the timer ticking by calling the *Start()* method.
+```
+myTimer.Start();
+```
+* We can add more event handlers, such as *MyTimer_Elapsed1*, *MyTimer_Elapsed2*, etc. They also will be getting called and execute the including code when the event is fired.
